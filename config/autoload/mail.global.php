@@ -64,13 +64,13 @@ return [
                     'charset' => 'utf-8',
 
                     //enable if you want body content to come from a template
-                    'use_template' => false,
+                    // 'use_template' => false,
 
                     //template options in case body has use template enabled
-                    'template' => [
+                    /*'template' => [
                         'name' => '',
                         'params' => [],
-                    ],
+                    ],*/
                 ],
 
                 //attachments config
