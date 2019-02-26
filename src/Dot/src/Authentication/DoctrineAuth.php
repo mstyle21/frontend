@@ -20,8 +20,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Doctrine\ORM\Tools\Setup;
-
-
+use Zend\Diactoros\Response\EmptyResponse;
 
 
 class DoctrineAuth extends AbstractAdapter implements AdapterInterface
@@ -239,11 +238,16 @@ class DoctrineAuth extends AbstractAdapter implements AdapterInterface
         }
 
         $password = $credentials->getCredential();
-        throw new \Exception('Not yet implemented');
+        // for later checking assuming is initially null
+        $user = null;
         //go over the identities and stop if one is found
         foreach ($identityColumns as $identityColumn) {
             $repo = $this->entityManager->getRepository($this->identityClass);
             $user = $repo->findOneBy([$identityColumn => $credentials->getIdentity()]);
+            if (!$user) {
+                continue;
+            }
+
             $identityArray = $this->getIdentityHydrator()->extract($user);
             $hash = $identityArray[$credentialColumn];
 
@@ -253,11 +257,23 @@ class DoctrineAuth extends AbstractAdapter implements AdapterInterface
             $result = $callbackCheck($hash, $password);
 
             // WORK IN PROGRESS
-
+            //continue looping if its not valid and identity is not found
+            //it will break if credentials invalid is received, as we suppose
+            // the identity column was good, but credentials were wrong
+            if ($result == true) {
+                return new AuthenticationResult(
+                    AuthenticationResult::SUCCESS,
+                    Utils::$authCodeToMessage[AuthenticationResult::SUCCESS],
+                    $user
+                );
+            }
         }
-
-        // work in progress
-
+        if (!$user instanceof IdentityInterface) {
+            return new AuthenticationResult(
+                AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND,
+                Utils::$authCodeToMessage[AuthenticationResult::FAILURE_UNCATEGORIZED]
+            );
+        }
 
         return new AuthenticationResult(
             AuthenticationResult::FAILURE_UNCATEGORIZED,
@@ -270,7 +286,6 @@ class DoctrineAuth extends AbstractAdapter implements AdapterInterface
      */
     public function challenge(): ResponseInterface
     {
-        exit(__FILE__ . ':' . __LINE__);
-        // TODO: Implement challenge() method.
+        return new EmptyResponse(401, ['WWW-Authenticate' => 'FormBased']);
     }
 }

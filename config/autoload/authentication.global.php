@@ -9,19 +9,20 @@ return [
         'adapter' => [
             'type' => 'DoctrineAdapter',
             'options' => [
+                // table and adapter is not required when using doctrine
+                // BUT make sure the ORM entity is configured correctly
+                'table' => 'user',
                 'adapter' => 'database',
 
-                // 'identity_prototype' => UserEntity::class,
+                // the following are required to use with DK DoctrineAuth
                 'identity_hydrator' => ClassMethodsCamelCase::class,
                 'identity_prototype' => \Dot\User\Entity\UserEntity::class,
                 // 'identity_prototype' => \Frontend\User\Entity\UserEntity::class,
 
-                'table' => 'user',
-
                 'identity_columns' => ['username', 'email'],
                 'credential_column' => 'password',
 
-                'callback_check' => PasswordCheck::class
+                'callback_check' => PasswordCheck::class,
             ]
         ],
         'storage' => [
