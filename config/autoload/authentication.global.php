@@ -7,12 +7,14 @@ use Frontend\User\Entity\UserEntity;
 return [
     'dot_authentication' => [
         'adapter' => [
-            'type' => 'CallbackCheck',
+            'type' => 'DoctrineAdapter',
             'options' => [
                 'adapter' => 'database',
 
-                'identity_prototype' => UserEntity::class,
+                // 'identity_prototype' => UserEntity::class,
                 'identity_hydrator' => ClassMethodsCamelCase::class,
+                'identity_prototype' => \Dot\User\Entity\UserEntity::class,
+                // 'identity_prototype' => \Frontend\User\Entity\UserEntity::class,
 
                 'table' => 'user',
 

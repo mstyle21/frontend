@@ -9,7 +9,9 @@ use Zend\ConfigAggregator\PhpFileProvider;
 $cacheConfig = [
     'config_cache_path' => __DIR__ . '/../data/config-cache.php',
 ];
+
 $aggregator = new ConfigAggregator([
+    \Dot\ErrorHandler\ConfigProvider::class,
     \Zend\Expressive\ConfigProvider::class,
     \Zend\Expressive\Router\ConfigProvider::class,
     \Zend\Expressive\Router\FastRouteRouter\ConfigProvider::class,
@@ -40,8 +42,7 @@ $aggregator = new ConfigAggregator([
     \Dot\Controller\Plugin\Mail\ConfigProvider::class,
     \Dot\Controller\Plugin\Forms\ConfigProvider::class,
     \Dot\Controller\Plugin\Session\ConfigProvider::class,
-    \Dot\Event\ConfigProvider::class,
-    \Dot\Mapper\ConfigProvider::class,
+
     \Dot\Event\ConfigProvider::class,
     \Dot\Filter\ConfigProvider::class,
     \Dot\FlashMessenger\ConfigProvider::class,
@@ -57,8 +58,8 @@ $aggregator = new ConfigAggregator([
     \Dot\Rbac\Guard\ConfigProvider::class,
     \Dot\Session\ConfigProvider::class,
     \Dot\Twig\ConfigProvider::class,
-    \Dot\User\ConfigProvider::class,
     \Dot\Validator\ConfigProvider::class,
+    \Dot\User\ConfigProvider::class,
     \Dot\Console\ConfigProvider::class,
 
     //application

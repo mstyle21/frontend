@@ -14,6 +14,8 @@
   },
   "require": {
     "php": "^7.1",
+    "dasprid/container-interop-doctrine": "^1.1",
+    "doctrine/orm": "^2.6",
     "dotkernel/dot-annotated-services": "^1.1",
     "dotkernel/dot-authentication-service": "^1.0",
     "dotkernel/dot-authentication-web": "^1.0",
@@ -42,7 +44,9 @@
     "dotkernel/dot-rbac-guard": "^1.0",
     "dotkernel/dot-session": "3.0",
     "dotkernel/dot-twigrenderer": "1.1",
+    "dotkernel/dot-user": "^1.0",
     "dotkernel/dot-validator": "^1.1",
+    "ramsey/uuid-doctrine": "^1.5",
     "roave/security-advisories": "dev-master",
     "twig/twig": "2.1.0",
     "zendframework/zend-captcha": "^2.6",
@@ -76,6 +80,7 @@
   "autoload": {
     "psr-4": {
       "Frontend\\App\\": "src/App/src",
+      "Dot\\": "src/Dot/src",
       "Frontend\\User\\": "src/User/src",
       "Frontend\\Console\\": "src/Console/src"
     }

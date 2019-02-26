@@ -130,10 +130,10 @@ class ConfigProvider
         return [
             'mapper_manager' => [
                 'factories' => [
-                    UserDbMapper::class => UserDbMapperFactory::class,
+                 //   UserDbMapper::class => UserDbMapperFactory::class,
                 ],
                 'aliases' => [
-                    UserEntity::class => UserDbMapper::class,
+                 //   UserEntity::class => UserDbMapper::class,
                 ],
             ]
         ];

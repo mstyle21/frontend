@@ -57,10 +57,10 @@ class ConfigProvider
         return [
             'mapper_manager' => [
                 'factories' => [
-                    UserMessageDbMapper::class => DbMapperFactory::class,
+                //    UserMessageDbMapper::class => DbMapperFactory::class,
                 ],
                 'aliases' => [
-                    UserMessageEntity::class => UserMessageDbMapper::class,
+                //    UserMessageEntity::class => UserMessageDbMapper::class,
                 ]
             ],
             'options' => [
