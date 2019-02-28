@@ -17,7 +17,7 @@ class DoctrineAuthFactory extends AbstractAdapterFactory
     {
         $options = $options ?? [];
         /** @var EntityManager $entityManager */
-        $entityManager = $container->get('doctrine.entity_manager.orm_default');
+        $entityManager = $container->get(EntityManager::class);
 
         // if (is_string($options['identity_prototype'] ?? null))
         // means if is set and is a string, equivalent to isset & is_string
